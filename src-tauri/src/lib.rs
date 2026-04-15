@@ -3,6 +3,7 @@ mod app_store;
 mod auto_launch;
 mod claude_mcp;
 mod claude_plugin;
+mod cli;
 mod codex_config;
 mod commands;
 mod config;
@@ -1411,6 +1412,16 @@ pub fn run() {
             let _ = (app_handle, event);
         }
     });
+}
+
+/// Headless CLI entry point
+pub async fn run_cli() {
+    use crate::cli;
+
+    if let Err(e) = cli::run_cli().await {
+        eprintln!("Error: {}", e);
+        std::process::exit(1);
+    }
 }
 
 // ============================================================

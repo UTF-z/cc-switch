@@ -2,6 +2,14 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
+    // Check for --headless or -x flag to run in CLI mode
+    let args: Vec<String> = std::env::args().collect();
+    if args.iter().any(|arg| arg == "--headless" || arg == "-x") {
+        let runtime = tokio::runtime::Runtime::new().expect("Failed to create tokio runtime");
+        runtime.block_on(cc_switch_lib::run_cli());
+        return;
+    }
+
     // 在 Linux 上设置 WebKit 环境变量以解决 DMA-BUF 渲染问题
     // 某些 Linux 系统（如 Debian 13.2、Nvidia GPU）上 WebKitGTK 的 DMA-BUF 渲染器可能导致白屏/黑屏
     // 参考: https://github.com/tauri-apps/tauri/issues/9394
