@@ -75,9 +75,8 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ""
         with:
-          args: --target x86_64-unknown-linux-gnu
+          args: --target x86_64-unknown-linux-gnu --config src-tauri/tauri.conf.ci.json
 
       - name: Upload Linux deb bundle
         uses: actions/upload-artifact@v4
@@ -155,9 +154,8 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ""
         with:
-          args: --target aarch64-unknown-linux-gnu
+          args: --target aarch64-unknown-linux-gnu --config src-tauri/tauri.conf.ci.json
 
       - name: Upload Linux arm64 deb bundle
         uses: actions/upload-artifact@v4
