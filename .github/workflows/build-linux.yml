@@ -66,6 +66,7 @@ jobs:
         run: pnpm install
 
       - name: Install Rust dependencies
+        working-directory: src-tauri
         run: |
           rustup target add x86_64-unknown-linux-gnu
           cargo fetch
@@ -144,6 +145,7 @@ jobs:
         run: pnpm install
 
       - name: Install Rust dependencies
+        working-directory: src-tauri
         run: |
           rustup target add aarch64-unknown-linux-gnu
           cargo fetch
